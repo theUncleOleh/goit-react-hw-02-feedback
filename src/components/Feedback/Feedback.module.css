@@ -1,0 +1,7 @@
+.Feedback__header {
+  color: blue;
+}
+
+.Feedback__container {
+  display: flex;
+}
