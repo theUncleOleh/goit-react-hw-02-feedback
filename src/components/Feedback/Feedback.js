@@ -1,6 +1,5 @@
 import React from 'react';
-import { Fragment } from 'react/cjs/react.production.min';
-import styles from './Feedback.module.css';
+import s from './Feedback.module.css';
 
 class Feedback extends React.Component {
   //  constructor () {
@@ -12,7 +11,10 @@ class Feedback extends React.Component {
   //         bad: 0
   //       }
   //  }
-
+  //  static defaultProps = {
+  //    total: 0,
+  //    positiveFeedback: 0,
+  //  }
   state = {
     good: 0,
     neutral: 0,
@@ -47,29 +49,39 @@ class Feedback extends React.Component {
     });
   };
 
+  countTotalFeedback = () => {
+    return this.state.good + this.state.neutral + this.state.bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    return Math.round(
+      (this.state.good * 100) / (this.state.good + this.state.neutral),
+    );
+  };
+
   render() {
     return (
-      <Fragment>
-        <h1 className={styles.Feedback__header}>Please leave feedback</h1>
-        <div className="Feedback__container">
+      <div className={s.container}>
+        <h1 className={s.header}>Please leave feedback</h1>
+        <div className="Feedback__button">
           <button
             type="button"
             onClick={this.handleGoodButton}
-            className="Feedback__btn"
+            className={s.btn}
           >
             good
           </button>
           <button
             type="button"
             onClick={this.handleNeutralButton}
-            className="Feedback__btn"
+            className={s.btn}
           >
             neutral
           </button>
           <button
             type="button"
             onClick={this.handleBadButton}
-            className="Feedback__btn"
+            className={s.btn}
           >
             bad
           </button>
@@ -79,8 +91,10 @@ class Feedback extends React.Component {
           <li className="Feedback__item">Good : {this.state.good}</li>
           <li className="Feedback__item">Neutral : {this.state.neutral}</li>
           <li className="Feedback__item">Bad : {this.state.bad}</li>
+          <li>Total : {this.countTotalFeedback()}</li>
+          <li>Positive feedback : {this.countPositiveFeedbackPercentage()}</li>
         </ul>
-      </Fragment>
+      </div>
     );
   }
 }
