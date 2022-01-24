@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './Feedback.module.css';
+import Statistics from '../Statistics/Statistics';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
 
 class Feedback extends React.Component {
   //  constructor () {
@@ -21,32 +23,8 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  handleGoodButton = () => {
-    console.log(' good');
-    console.log(this);
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-  handleNeutralButton = () => {
-    console.log('neutral');
-    console.log(this);
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-  handleBadButton = () => {
-    console.log('bad');
-    console.log(this);
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
+  handleClick = option => {
+    this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
 
   countTotalFeedback = () => {
@@ -60,9 +38,12 @@ class Feedback extends React.Component {
   };
 
   render() {
+    const keys = Object.keys(this.state);
     return (
       <div className={s.container}>
         <h1 className={s.header}>Please leave feedback</h1>
+        <FeedbackOptions options={keys} onLeaveFeedback={this.handleClick} />
+        {/* <h1 className={s.header}>Please leave feedback</h1>
         <div className="Feedback__button">
           <button
             type="button"
@@ -85,15 +66,23 @@ class Feedback extends React.Component {
           >
             bad
           </button>
-        </div>
+        </div> */}
         <h2 className="Feedback__title">Statistics</h2>
-        <ul className="Feedback__list">
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        />
+
+        {/* <ul className="Feedback__list">
           <li className="Feedback__item">Good : {this.state.good}</li>
           <li className="Feedback__item">Neutral : {this.state.neutral}</li>
           <li className="Feedback__item">Bad : {this.state.bad}</li>
           <li>Total : {this.countTotalFeedback()}</li>
           <li>Positive feedback : {this.countPositiveFeedbackPercentage()}</li>
-        </ul>
+        </ul> */}
       </div>
     );
   }
