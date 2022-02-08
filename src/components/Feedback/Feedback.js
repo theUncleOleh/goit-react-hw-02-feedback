@@ -4,6 +4,8 @@ import Statistics from '../Statistics/Statistics';
 import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
 import Section from '../Section/Section';
 import Notification from '../Notification/Notification';
+import PropTypes from 'prop-types';
+
 class Feedback extends React.Component {
   //  constructor () {
   //      super ()
@@ -69,3 +71,9 @@ class Feedback extends React.Component {
 }
 
 export default Feedback;
+
+Feedback.propTypes = {
+  good: PropTypes.string.isRequired,
+  neutral: PropTypes.string.isRequired,
+  bad: PropTypes.string.isRequired,
+};
