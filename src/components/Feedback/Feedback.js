@@ -62,8 +62,7 @@ class Feedback extends React.Component {
             ></Statistics>
           ) : (
             <Notification message="there is no feedback"></Notification>
-          )}
-          :{' '}
+          )}{' '}
         </Section>
       </div>
     );
@@ -76,4 +75,6 @@ Feedback.propTypes = {
   good: PropTypes.string.isRequired,
   neutral: PropTypes.string.isRequired,
   bad: PropTypes.string.isRequired,
+  total: PropTypes.string.isRequired,
+  positivePercentage: PropTypes.string.isRequired,
 };

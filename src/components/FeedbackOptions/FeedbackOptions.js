@@ -17,3 +17,7 @@ export default function FeedbackOptions({ options, onLeaveFeedback }) {
     </div>
   );
 }
+
+// FeedbackOptions.propTypes = {
+//   options
+// }
